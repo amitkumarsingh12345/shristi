@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<style>
+    #divText{
+        background-image: url(amit.webp);
+    }
+</style>
+    </head>
+
+<body>
+    <div class="container-fluid">
+        <div class=" p-5 row h-100 d-flex justify-content-center align-items-center">
+            <div class="col-12 h-50" style="box-shadow: 0px 0px 5px gray; border-radius: 5px;">
+                <div id="divText" class="col-12 col-sm-6 d-flex justify-content-center align-items-center"
+                    style="width: 100%;height: 95%; font-size: 45rem; color: rgb(5, 1, 15); font-family: Algerian;">
+                </div>
+            </div>
+            <div class="col-12 h-50" style="box-shadow: 0px 0px 5px gray;  border-radius: 5px;">
+                <img src="amit.jpg" id="img" style="width: 100%;height: 95%;">
+            </div>
+            <button class="btn btn-dark text-light"  
+            style="height: 100px; position: absolute; top: 47%; width: 90%;font-size: 3rem;" onclick="speechStart();">
+            START NOW
+        </button>
+        </div>
+    </div>
+</body>
+
+<script>
+    function speechStart() {
+        var alf = "abcdefghijklmnopqrstuvwxyz", i = 0;
+        var closeTime = window.setInterval(function () {
+            var cot;
+            document.querySelector("button").style.display = 'none';
+            document.getElementById("divText").style.background = 'none';
+            var image = ["apple", "boy", "cat", "dog", "elephant", "fish", "grapes", "hen", "inkpot", "jug", "kite", "lion", "mango", "nest", "orange", "parrot", "queen", "rabit", "ship", "tiger", "umbrella", "van", "watch", "x-mas tree", "yak", "zebra"];
+            var ch = alf[i];
+            if (alf[i] >= 'a' && alf[i] <= 'z')
+                ch = (alf[i]).toUpperCase();
+            image.forEach(function (data) {
+                if ((data[0].toUpperCase()) == ch) {
+                    img.src = data + '.jpg';
+                    var sp = document.getElementById("divText").innerText = ch;
+                    cot = sp + " for " + data;
+                }
+            });
+
+
+            if (speechSynthesis) {
+                var vls = new SpeechSynthesisUtterance();
+                vls.language = "en-us";
+                vls.text = cot;
+                vls.volume = 1;
+                vls.rate = 0.67;
+                vls.pitch = 1;
+                window.speechSynthesis.speak(vls);
+            }
+            if (i++ == 25)
+                clearInterval(closeTime);
+        }, 3000);
+    }
+</script>
+
+</html>
